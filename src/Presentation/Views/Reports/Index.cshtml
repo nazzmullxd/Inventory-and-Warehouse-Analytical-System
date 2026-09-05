@@ -1,0 +1,14 @@
+@model WorkspaceModel
+<div class="reports-layout">
+    <nav class="report-list" aria-label="Report selection">@foreach (var r in DisplayFixtures.Reports) {<a class="report-choice @(Model.Report == r.Key ? "selected" : "")" href="/reports?report=@r.Key" aria-current="@(Model.Report == r.Key ? "page" : null)"><span class="report-code">@r.Key</span><span>@r.Value<small>A4 report preview</small></span><span aria-hidden="true">→</span></a>}</nav>
+    <section class="panel report-config"><p class="eyebrow">@Model.Report · REPORT PARAMETERS</p><h2>@DisplayFixtures.Reports[Model.Report]</h2><p class="muted">Review all rows in the declared sample scope. Screen filters and pagination do not limit the report.</p>
+        <form id="filters" class="report-form" method="get" action="/reports/@Model.Report/preview">
+            @if (Model.Report == "R4") {<div class="field"><label for="start">Supplier period start</label><input type="date" class="form-control" id="start" name="start" value="@Model.Start" required /></div><div class="field"><label for="end">Supplier period end <span>(inclusive)</span></label><input type="date" class="form-control" id="end" name="end" value="@Model.End" required /></div>}
+            <div class="field"><label for="date">@(Model.Report == "R4" ? "Dead-stock as-of date" : Model.Report == "R5" ? "Requisition day and stock date" : Model.Report == "R1" ? "Movement day" : "Analysis date")</label><input type="date" class="form-control" id="date" name="date" value="@Model.Date" required /></div>
+            <div class="scope-note"><strong>Report scope</strong><p>@(Model.Report == "R2" ? "Complete illustrative warehouse · all three sample items. Includes FIFO layers and supplied warehouse total." : Model.Report == "R4" ? "All three sample suppliers, plus a separate dead-stock section. FIFO dead-stock valuation is an assumption." : Model.Report == "R5" ? "All three source-example requisitions: RQ-0871, RQ-0872 and RQ-0873." : Model.Report == "R3" ? "All three sample recommendations and a printable purchase requisition draft." : "All three sample items, with supplied receipt and issue movement counts.")</p></div>
+            <partial name="_Scenario" model="Model" />
+            <button class="btn btn-primary" type="submit">Preview report <span aria-hidden="true">→</span></button>
+        </form>
+        <div class="pdf-note"><strong>PDF export is not connected</strong><p>HTML samples support browser printing. Open PDF and Download PDF will be available after report-service integration.</p></div>
+    </section>
+</div>

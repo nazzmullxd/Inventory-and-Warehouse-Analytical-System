@@ -1,0 +1,244 @@
+@media (min-width: 1500px) {
+  main {
+    padding-top: 40px;
+  }
+  .metric-value {
+    font-size: 2.2rem;
+  }
+  .dashboard-metrics {
+    grid-template-columns: 1.2fr 1fr 1fr;
+  }
+}
+@media (max-width: 1199px) {
+  main {
+    padding: 24px;
+  }
+  .topbar {
+    padding: 0 24px;
+  }
+  .metric {
+    padding: 18px;
+  }
+  .metric-value {
+    font-size: 1.6rem;
+  }
+  .metric.featured {
+    padding-top: 16px;
+  }
+  .match-metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+  .period-metrics > div {
+    align-items: flex-start;
+  }
+  .period-metrics a {
+    margin-left: 0;
+  }
+  .reports-layout {
+    grid-template-columns: 1fr 1.4fr;
+  }
+}
+@media (max-width: 991px) {
+  .sidebar {
+    position: relative;
+    width: auto;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+  }
+  .brand {
+    padding: 0;
+    font-size: 1.4rem;
+  }
+  .brand small {
+    font-size: 0.5rem;
+  }
+  .brand-mark {
+    width: 32px;
+    height: 34px;
+  }
+  .nav-toggle.btn {
+    display: inline-flex;
+  }
+  .sidebar nav {
+    grid-column: 1/-1;
+  }
+  .sidebar nav[hidden] {
+    display: none;
+  }
+  .nav-label,
+  .sidebar-note,
+  .workspace-identity {
+    display: none;
+  }
+  .nav-item {
+    display: inline-flex;
+    margin: 3px;
+    font-size: 0.8rem;
+    min-height: 44px;
+  }
+  .nav-child {
+    padding-left: 13px;
+  }
+  .workspace {
+    margin: 0;
+  }
+  .topbar {
+    height: auto;
+    min-height: 54px;
+    padding: 12px 20px;
+  }
+  .bottom-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .metric-grid {
+    gap: 12px;
+  }
+  .page-heading {
+    align-items: flex-start;
+  }
+  .reports-layout {
+    grid-template-columns: 1fr 1.4fr;
+  }
+}
+@media (max-width: 767px) {
+  main {
+    padding: 22px 16px 0;
+  }
+  .page-heading {
+    flex-direction: column;
+    gap: 16px;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+  .metric-grid,
+  .two-columns,
+  .match-metrics,
+  .bottom-grid,
+  .period-metrics,
+  .reports-layout {
+    grid-template-columns: 1fr;
+  }
+  .metric-value {
+    font-size: 2rem;
+  }
+  .period-metrics > div + div {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .field,
+  .field-wide {
+    min-width: 0;
+    width: 100%;
+    max-width: none;
+  }
+  .filter-band {
+    padding: 16px;
+    gap: 14px;
+  }
+  .filter-band > .btn {
+    flex: 1;
+  }
+  .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .panel-heading {
+    padding: 18px 16px;
+    align-items: flex-start;
+  }
+  .panel-heading .subtle-label {
+    white-space: normal;
+  }
+  .workspace-footer {
+    flex-direction: column;
+    padding-bottom: 20px;
+  }
+  .report-config {
+    padding: 20px;
+  }
+  .report-paper {
+    padding: 22px 16px;
+  }
+  .report-paper .table-region {
+    overflow: auto;
+  }
+  .report-paper .evidence-table {
+    min-width: 570px;
+  }
+  .report-title h2 {
+    font-size: 1.2rem;
+  }
+  .topbar div {
+    font-size: 0.73rem;
+  }
+  .topbar div span {
+    padding: 0 5px;
+  }
+  .demo-tag {
+    font-size: 0.63rem;
+  }
+  .context-list {
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
+  .context-list dd {
+    margin-bottom: 10px;
+  }
+  .report-choice {
+    padding: 14px;
+  }
+  .report-list {
+    gap: 8px;
+  }
+  .notice {
+    padding: 16px;
+  }
+  .source-panel blockquote {
+    padding: 8px 16px 22px;
+  }
+  .report-footer {
+    flex-direction: column;
+  }
+  .sample-notice {
+    font-size: 0.72rem;
+  }
+  .nav-item {
+    display: flex;
+  }
+  .nav-child {
+    padding-left: 40px;
+  }
+}
+@media (max-width: 359px) {
+  main {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .topbar {
+    padding: 12px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    padding: 11px 12px;
+  }
+  .report-toolbar {
+    align-items: flex-start;
+    gap: 10px;
+    flex-direction: column;
+  }
+  .metric-value {
+    font-size: 1.8rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}

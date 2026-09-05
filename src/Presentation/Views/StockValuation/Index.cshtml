@@ -1,0 +1,24 @@
+@model WorkspaceModel
+<form class="filter-band" id="filters" method="get">
+    <div class="field field-wide"><label for="item">Item ID <span>(required)</span></label><input class="form-control" id="item" name="item" value="@Model.Item" required aria-describedby="item-help" /><small id="item-help">Sample: IT-1108 · A4 Paper (ream)</small></div>
+    <div class="field"><label for="date">As-of date <span>(required)</span></label><input class="form-control" type="date" id="date" name="date" value="@Model.Date" required /></div>
+    <button class="btn btn-primary" name="apply" value="true">Compute valuation</button><a class="reset-link" href="/stock-valuation">Reset</a>
+    <partial name="_Scenario" model="Model" />
+</form>
+<partial name="_Feedback" model="Model" />
+@if (Model.Error == null && Model.Available && Model.Scenario != "unavailable")
+{
+    @if (!Model.Applied) {<div class="panel empty-state"><span class="empty-symbol" aria-hidden="true">▤</span><h2>Start with an item and a date</h2><p>Select an item and date to view its closing stock and FIFO layers.</p><p class="muted">The sample item and date are ready to use above.</p></div>}
+    else {
+    <section data-results>
+        <div class="section-heading"><div><h2>A4 Paper <span class="id-label">IT-1108</span></h2><p>Unit: ream · Closing stock as of @Model.DateLabel</p></div>@if (Model.Scenario == "success") {<a class="btn btn-outline-secondary" href="@Model.ReportUrl("R2")">Warehouse valuation report ↗</a>}</div>
+        <div class="metric-grid two-columns"><article class="metric"><p>Closing stock</p><div class="metric-value">@(Model.Scenario == "empty" ? "0" : "90") <span>reams</span></div><p class="metric-context">@(Model.Scenario == "empty" ? "Illustrative zero-stock result" : "Supplied closing quantity")</p></article><article class="metric featured"><p>FIFO stock value</p><div class="metric-value"><small>BDT</small> @(Model.Scenario == "empty" ? "0.00" : Model.Scenario == "partial" ? "Unavailable" : "49,050.00")</div><p class="metric-context">@(Model.Scenario == "partial" ? "Value withheld: incomplete layers" : "For this item only")</p></article></div>
+        <section class="panel"><div class="panel-heading"><div><h2>Remaining FIFO layers</h2><p>Unconsumed receipt layers make up the remaining stock.</p></div></div>
+            @if (Model.Scenario == "empty") {<p class="empty-state">No remaining FIFO layers.</p>}
+            else if (Model.Scenario == "partial") {<p class="empty-state">Receipt-layer evidence is incomplete. A safe valuation report is unavailable.</p>}
+            else {<partial name="_Table" model="DisplayFixtures.Layers" />}
+        </section>
+        @if (Model.Scenario == "success") {<section class="panel compact-panel"><h2>Receipt and issue context</h2><p>Source example coverage: 02–08 Jul 2026. Received: <strong>240 reams</strong> · Issued: <strong>150 reams</strong>.</p><p class="muted">The linked R2 report covers the complete illustrative warehouse, not just A4 Paper.</p></section>}
+    </section>
+    }
+}

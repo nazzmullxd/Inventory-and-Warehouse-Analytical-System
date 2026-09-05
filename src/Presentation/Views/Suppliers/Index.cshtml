@@ -1,0 +1,19 @@
+@model WorkspaceModel
+<form class="filter-band" id="filters" method="get">
+    <div class="field"><label for="start">Period start</label><input class="form-control" type="date" id="start" name="start" value="@Model.Start" required /></div><div class="field"><label for="end">Period end <span>(inclusive)</span></label><input class="form-control" type="date" id="end" name="end" value="@Model.End" required /></div>
+    <div class="field"><label for="filter">Standing</label><select class="form-select" id="filter" name="filter"><option value="all" selected="@(Model.Filter == "all")">All suppliers</option><option value="watch" selected="@(Model.Filter == "watch")">Watch list</option><option value="good" selected="@(Model.Filter == "good")">Good</option><option value="excellent" selected="@(Model.Filter == "excellent")">Excellent</option></select></div>
+    <button class="btn btn-primary" name="apply" value="true">Analyze suppliers</button><a class="reset-link" href="/suppliers/performance">Reset</a><partial name="_Scenario" model="Model" />
+</form>
+<partial name="_Feedback" model="Model" />
+@if (Model.Error == null && Model.Available && Model.Scenario != "unavailable") {
+<div data-results>
+    <div class="section-heading"><div><h2>Delivery reliability</h2><p>@Model.PeriodLabel</p></div>@if (Model.Scenario == "success") {<a class="btn btn-outline-secondary" href="/reports?report=R4&start=@Model.Start&end=@Model.End">Configure supplier report ↗</a>}</div>
+    @if (Model.Scenario == "empty") {<div class="panel empty-state"><h2>No delivered orders in this period</h2><p>No on-time percentage or late-delivery average is available.</p></div>}
+    else {
+        var rows = DisplayFixtures.Suppliers.Rows.Where(r => Model.Filter switch { "watch" => r[6] == "Watch list", "good" => r[6] == "Good", "excellent" => r[6] == "Excellent", _ => true }).ToArray();
+        <section class="panel"><partial name="_Table" model="new DataTable(DisplayFixtures.Suppliers.Caption, DisplayFixtures.Suppliers.Headers, rows)" /></section>
+        <details class="panel evidence-details"><summary>Meghna Traders · inspect delivery evidence</summary><p>20 delivered orders: 17 on time and 3 late. Supplied late delays: 2, 4 and 6 days. Average delay of late orders: 4 days.</p><p class="muted">Individual order IDs and promised/actual dates were not supplied. Open-delivery exclusions and a weighted warehouse summary are unavailable.</p></details>
+    }
+    <div class="notice neutral"><strong>Read the measures together</strong><p>On-time delivery describes delivered orders only. Average delay describes late deliveries only. A missing late-delivery sample is different from a zero-day delay.</p></div>
+</div>
+}

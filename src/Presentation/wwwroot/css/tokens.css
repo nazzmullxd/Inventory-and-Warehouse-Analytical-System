@@ -1,0 +1,22 @@
+:root {
+  --canvas: #f5f7f8;
+  --surface: #fff;
+  --ink: #202a2f;
+  --muted: #5b6670;
+  --line: #d6dce1;
+  --primary: #146c43;
+  --focus: #0b63ce;
+  --success: #176b3a;
+  --success-bg: #e7f6ec;
+  --warning: #7a4d00;
+  --warning-bg: #fff4ce;
+  --info: #0b4f9c;
+  --info-bg: #eaf2ff;
+  --danger: #9f1c14;
+  --danger-bg: #fdecec;
+  --radius: 6px;
+  --bs-body-font-family: Inter, "Segoe UI", "Nirmala UI", Arial, sans-serif;
+  --bs-body-color: var(--ink);
+  --bs-body-bg: var(--canvas);
+  --bs-border-color: var(--line);
+}

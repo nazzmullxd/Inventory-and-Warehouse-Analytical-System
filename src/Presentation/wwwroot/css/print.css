@@ -1,0 +1,120 @@
+@page {
+  size: A4 portrait;
+  margin: 14mm;
+}
+@media print {
+  .report-paper .evidence-table .numeric-cell {
+    white-space: nowrap;
+    overflow-wrap: normal;
+  }
+  html,
+  body {
+    background: white !important;
+    color: #000 !important;
+    font-size: 10pt;
+  }
+  .sidebar,
+  .topbar,
+  .page-heading,
+  .sample-notice,
+  .report-toolbar,
+  .print-guidance,
+  .workspace-footer,
+  .skip-link,
+  .scroll-hint,
+  #request-status {
+    display: none !important;
+  }
+  .workspace {
+    margin: 0;
+  }
+  main {
+    padding: 0;
+    max-width: none;
+  }
+  .report-paper {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    max-width: none;
+    box-shadow: none;
+  }
+  .report-paper .table-region {
+    overflow: visible;
+  }
+  .report-paper .evidence-table {
+    width: 100%;
+    min-width: 0;
+    font-size: 10pt;
+    table-layout: auto;
+  }
+  .report-paper .evidence-table td,
+  .report-paper .evidence-table th {
+    padding: 3mm 2mm;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    color: #000 !important;
+    font-size: 10pt;
+  }
+  .report-paper .evidence-table thead th {
+    background: #eee !important;
+  }
+  .report-paper .evidence-table tbody th {
+    min-width: 0;
+  }
+  thead {
+    display: table-header-group;
+  }
+  tfoot {
+    display: table-row-group;
+  }
+  tr {
+    break-inside: avoid;
+  }
+  h2,
+  h3,
+  .report-title {
+    break-after: avoid;
+  }
+  .report-heading {
+    break-inside: avoid;
+  }
+  .report-brand {
+    font-size: 12pt;
+  }
+  .report-heading p,
+  .report-scope,
+  .report-paper > p,
+  .report-footer,
+  .report-brand span {
+    font-size: 10pt;
+  }
+  .status {
+    font-size: 10pt;
+    background: transparent !important;
+    color: #000 !important;
+    border: 1px solid #777;
+    padding: 1mm;
+  }
+  .draft-section {
+    break-inside: avoid;
+    font-size: 10pt;
+  }
+  .report-footer {
+    display: flex;
+    flex-direction: row;
+  }
+  .report-watermark {
+    font-size: 10pt !important;
+  }
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+  .report-paper caption {
+    font-size: 10pt;
+  }
+  .report-subheading {
+    margin-top: 7mm;
+  }
+}

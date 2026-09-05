@@ -1,0 +1,24 @@
+@model WorkspaceModel
+@{ var match = DisplayFixtures.Matches.FirstOrDefault(x => x.Id == Model.Requisition); }
+<a class="back-link" href="@Model.ReturnUrl">← Back to clarification results</a>
+<form class="filter-band" id="filters" method="get">
+    <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+    <div class="field field-wide"><label for="requisition">Existing requisition ID</label><input class="form-control" id="requisition" name="requisition" value="@Model.Requisition" required aria-describedby="requisition-help" list="sample-requisitions" /><small id="requisition-help">Sample IDs RQ-0871–RQ-0880; exact ID supported.</small><datalist id="sample-requisitions">@foreach (var f in DisplayFixtures.Matches) {<option value="@f.Id">@f.Department · @f.Status</option>}</datalist></div>
+    <div class="field"><label for="date">Stock as-of date</label><input class="form-control" type="date" id="date" name="date" value="@Model.Date" required /></div><button class="btn btn-primary" name="apply" value="true">Run AI matching</button><a class="reset-link" href="/requisitions/matching">Reset</a>
+</form>
+<partial name="_Feedback" model="Model" />
+@if (Model.Error == null && Model.Available && match != null) {
+<div data-results>
+    <section class="panel source-panel"><div class="panel-heading"><div><p class="eyebrow">EXISTING REQUISITION · READ-ONLY</p><h2>@match.Id <span class="id-label">@match.Department</span></h2><p>Requisition date: 08 Jul 2026 · stock as of @Model.DateLabel</p></div></div><blockquote lang="@(match.Id == "RQ-0875" ? "bn" : "en")">@(match.Text == "" ? "No source text was supplied." : match.Text)</blockquote></section>
+    @if (!Model.Applied) {<div class="panel empty-state"><h2>Ready to inspect the match</h2><p>Run AI matching to display the supplied result for this requisition.</p></div>}
+    else {
+        <section class="panel compact-panel"><div class="section-heading"><div><p class="eyebrow">MATCH RESULT</p><h2>@match.Item</h2></div><span class="status @(match.Status == "Matched" ? "status-success" : "status-warning")">@match.Status</span></div><p><strong>@match.Similarity text similarity</strong></p><p>@match.Reason</p></section>
+        <div class="metric-grid match-metrics"><article class="metric"><p>Parsed quantity</p><strong class="fact-value">@match.Quantity</strong></article><article class="metric"><p>Catalogue unit price</p><strong class="fact-value">@match.Price</strong></article><article class="metric"><p>Total price</p><strong class="fact-value">@match.Total</strong></article><article class="metric"><p>Stock on hand</p><strong class="fact-value">@match.Stock</strong><p class="metric-context">@match.Sufficiency</p></article></div>
+        <section class="panel"><div class="panel-heading"><div><h2>Candidate evidence</h2><p>Supplied ranking and similarity; no browser matching or pricing.</p></div></div>
+        @if (match.Id == "RQ-0871") {<partial name="_Table" model='new DataTable("Supplied catalogue candidates", ["Rank", "Item", "Similarity", "Common terms"], [["1", "IT-3320 · Gel Pen, Black", "80%", "4"], ["2", "Whiteboard marker · ID not supplied", "18%", "Not supplied"]])' />}
+        else {<p class="panel-copy">@(match.Id is "RQ-0875" or "RQ-0876" ? "No candidates supplied." : "Additional candidate evidence was not supplied for this display scenario.")</p>}
+        </section>
+        <a class="btn btn-outline-secondary" href="@Model.ReportUrl("R5")">View matching log sample ↗</a><p class="muted mt-2">R5 covers the three source-example requisitions RQ-0871–RQ-0873 only.</p>
+    }
+</div>
+}

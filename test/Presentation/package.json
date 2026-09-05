@@ -1,0 +1,6 @@
+{
+  "name": "iwas-presentation-checks",
+  "private": true,
+  "scripts": { "test": "node verify.mjs" },
+  "devDependencies": { "@axe-core/playwright": "4.10.2", "playwright": "1.55.0" }
+}

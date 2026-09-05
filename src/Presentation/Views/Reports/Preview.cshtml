@@ -1,0 +1,22 @@
+@model WorkspaceModel
+<div class="report-toolbar"><a class="back-link" href="/reports?report=@Model.Report&date=@Model.Date&start=@Model.Start&end=@Model.End&scenario=@Model.Scenario">← Back to reports</a>@if (Model.Available && Model.Error == null && Model.Scenario is "success" or "empty") {<button type="button" class="btn btn-primary" id="print-report">Print sample</button>}</div>
+<partial name="_Feedback" model="Model" />
+@if (Model.Error == null && Model.Available && Model.Scenario is "success" or "empty") {
+    <p class="print-guidance">Illustrative HTML sample. For A4 printing, use portrait and enable browser headers/footers for page numbers. Formal PDF output and Page X of Y require future report integration.</p>
+    <article class="report-paper" data-results><header class="report-heading"><div class="report-brand">PADMA TRADING LTD <span>Sample company</span></div><p>Inventory &amp; Warehouse Analytics System</p><div class="report-title"><h2>@Model.Title</h2><span>@Model.Report</span></div><p>@(Model.Report == "R4" ? $"Supplier period: {Model.PeriodLabel} · Dead stock: {Model.DateLabel}" : $"Date: {Model.DateLabel}")</p><p class="report-watermark">ILLUSTRATIVE SAMPLE · NOT LIVE ANALYSIS</p></header>
+    @if (Model.Scenario == "empty") {
+        <section class="empty-state"><h3>No records in this illustrative scope</h3><p>Complete empty display fixture · @Model.DateLabel</p></section>
+        @if (Model.Report == "R4") {<h3>Supplier performance</h3><p>No delivered orders in this period.</p><h3>Dead stock and disposal recommendations</h3><p>No dead-stock items in this illustrative scope.</p>}
+        @if (Model.Report == "R3") {<h3>Purchase requisition draft</h3><p>No items to order. No order has been placed.</p>}
+    }
+    else { switch (Model.Report) {
+        case "R1": <partial name="_Table" model="DisplayFixtures.Movement" /> break;
+        case "R2": <p class="report-scope">Scope: complete illustrative warehouse, all three items. Currency: BDT.</p><partial name="_Table" model="DisplayFixtures.Valuation" /> break;
+        case "R3": <partial name="_Table" model="DisplayFixtures.ReorderReport" /><section class="draft-section"><h3>Purchase requisition draft</h3><span class="status status-info">Draft · analytical recommendation</span><p>Analysis date: @Model.DateLabel</p><p><strong>Toner Cartridge · IT-2201 · Recommended quantity: 45 pieces</strong></p><p>For purchase-office review. No order has been placed.</p></section> break;
+        case "R4": <partial name="_Table" model='new DataTable(DisplayFixtures.Suppliers.Caption, ["Supplier", "Orders", "On-time", "Average late delay", "Standing"], DisplayFixtures.Suppliers.Rows.Select(r => new[] {r[0], r[1], r[3], r[5], r[6]}).ToArray())' /><h3 class="report-subheading">Dead stock and disposal recommendations</h3><p>As of @Model.DateLabel · FIFO valuation basis is an assumption.</p><partial name="_Table" model="DisplayFixtures.DeadStock" /> break;
+        case "R5": <partial name="_Table" model="DisplayFixtures.MatchingLog" /> break;
+    } }
+    <footer class="report-footer"><span>Scope: all rows of this supplied report sample<br />Snapshot: IWAS-DEMO-2026-07-08 · static fixture; no generation time</span><span>Preview · @Model.Report</span></footer>
+    </article>
+}
+@section Scripts {<script src="~/js/pages/reports.js" asp-append-version="true" defer></script>}
