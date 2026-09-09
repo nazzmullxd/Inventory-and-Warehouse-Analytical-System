@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/components.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/pages.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/typography.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/responsive.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/print.css" asp-append-version="true" />
 </head>
@@ -37,16 +38,15 @@
             <a href="@url" class="nav-item @(active ? "active" : "") @(key == "Clarifications" ? "nav-child" : "")" aria-current="@(active ? "page" : null)"><span class="nav-icon icon-@icon" aria-hidden="true"></span>@label</a>
         }
     </nav>
-    <div class="sidebar-note"><span class="live-dot" aria-hidden="true"></span> Read-only workspace<p>Insights and reports.<br />Your source records stay intact.</p></div>
-    <div class="workspace-identity"><span class="avatar">PT</span><span>Padma Trading Ltd<small>Sample company · Dhaka</small></span></div>
+    <div class="sidebar-note"><span class="live-dot" aria-hidden="true"></span> Operations workspace<p>Insights and reports.<br />Warehouse records stay intact.</p></div>
+    <div class="workspace-identity"><span class="avatar">PT</span><span>Padma Trading Ltd<small>Dhaka operations</small></span></div>
 </aside>
 <div class="workspace">
-    <header class="topbar"><div>Workspace <span aria-hidden="true">/</span> <strong>@(Model.Page == "Preview" ? "Reports" : Model.Title)</strong></div><span class="demo-tag">Illustrative sample</span></header>
+    <header class="topbar"><div>Workspace <span aria-hidden="true">/</span> <strong>@(Model.Page == "Preview" ? "Reports" : Model.Title)</strong></div></header>
     <main id="main" tabindex="-1">
         <div class="page-heading"><div><p class="eyebrow">INVENTORY &amp; WAREHOUSE ANALYTICS</p><h1>@Model.Title</h1><p class="page-description">@Model.Description</p></div>@if (Model.Page == "Dashboard") {<a class="btn btn-outline-secondary" href="/reports">Browse reports <span aria-hidden="true">↗</span></a>}</div>
-        <div class="sample-notice"><span class="info-symbol" aria-hidden="true">i</span><div><strong>Sample workspace</strong> · Results are supplied examples, not live analysis. Sample date: 08 Jul 2026; supplier period: Jan–Jun 2026.</div></div>
         @RenderBody()
-        <footer class="workspace-footer"><span>IWAS <span aria-hidden="true">·</span> Presentation preview</span><span>BDT currency · Asia/Dhaka date context</span></footer>
+        <footer class="workspace-footer"><span>IWAS <span aria-hidden="true">·</span> Operations workspace</span><span>BDT currency · Asia/Dhaka date context</span></footer>
     </main>
 </div>
 <script src="~/js/shared/workspace.js" asp-append-version="true" defer></script>

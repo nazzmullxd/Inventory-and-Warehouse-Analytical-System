@@ -86,7 +86,7 @@
     }
     if (status) {
       status.classList.remove("visually-hidden");
-      status.textContent = "Loading sample results…";
+      status.textContent = "Loading results...";
     }
     form.setAttribute("aria-busy", "true");
     // Native navigation owns request cancellation and Back/Forward; no asynchronous result races.

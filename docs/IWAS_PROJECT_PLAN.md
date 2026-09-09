@@ -14,8 +14,8 @@ IWAS helps warehouse staff inspect existing stock, supplier, and requisition dat
 | [UI/UX plan](IWAS_UI_UX_PLAN.md) | Canonical screens, components, interactions, reports, and acceptance scenarios |
 | [Delivery blueprint](IWAS_IMPLEMENTATION_BLUEPRINT.md) | Future Presentation work packages and gates |
 | [Master prompt](Codex%20Master%20Prompt%20%E2%80%94%20IWAS.md) | Concise documentation-only instructions |
-| [Review record](docs/DOCUMENTATION_REVIEW.md) | Cuts, corrections, retained requirements, and decisions |
-| [Assignment](CSC470_Project09_Warehouse_Analytics.pdf) | Functional requirements and worked examples |
+| [Review record](DOCUMENTATION_REVIEW.md) | Cuts, corrections, retained requirements, and decisions |
+| [Assignment](../CSC470_Project09_Warehouse_Analytics.pdf) | Functional requirements and worked examples |
 | [Original documents](docs/archive/2026-09-05/) | Preserved historical full-system plans, inactive |
 
 The owner's current instructions govern scope and stack; the PDF governs business requirements. The UI/UX plan supersedes archived frontend sections. SOURCE means an assignment requirement; OWNER an explicit owner constraint; ASSUMPTION a provisional source-gap decision; RECOMMENDATION a proposed design choice.

@@ -21,8 +21,7 @@
   min-width: 200px;
 }
 .field label,
-.report-form label,
-.scenario-picker label {
+.report-form label {
   font-size: 0.78rem;
   font-weight: 600;
 }
@@ -318,21 +317,6 @@
   font-weight: 600;
   text-decoration: none;
 }
-.context-list {
-  display: grid;
-  grid-template-columns: minmax(100px, auto) 1fr;
-  gap: 10px 18px;
-  font-size: 0.78rem;
-  margin: 12px 0 0;
-}
-.context-list dt {
-  font-weight: 400;
-  color: var(--muted);
-}
-.context-list dd {
-  margin: 0;
-  overflow-wrap: anywhere;
-}
 .workspace-footer {
   display: flex;
   justify-content: space-between;
@@ -391,25 +375,6 @@
 .empty-symbol {
   font-size: 2rem;
   color: #477257;
-}
-.scenario-picker {
-  flex-basis: 100%;
-  border-top: 1px solid #e6eaea;
-  padding-top: 12px;
-  margin-top: 2px;
-  font-size: 0.75rem;
-  color: var(--muted);
-}
-.scenario-picker summary {
-  cursor: pointer;
-  width: fit-content;
-}
-.scenario-picker p {
-  margin-top: 12px;
-}
-.scenario-picker select {
-  max-width: 260px;
-  margin-top: 6px;
 }
 .evidence-details {
   padding: 20px 22px;

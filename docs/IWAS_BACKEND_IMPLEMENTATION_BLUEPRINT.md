@@ -2,7 +2,7 @@
 
 Status: future implementation plan, 9 September 2026. The current request authorizes documentation only. The existing UI fixture preview remains intact.
 
-The [Business plan](IWAS_BUSINESS_PLAN.md) owns algorithms and use cases. The [Model plan](IWAS_MODEL_PLAN.md) owns source/query/result contracts. The [UI/UX plan](IWAS_UI_UX_PLAN.md) owns presentation behavior; the [Presentation handoff](docs/PRESENTATION_HANDOFF.md) records actual implementation. This document sequences future work and integration.
+The [Business plan](IWAS_BUSINESS_PLAN.md) owns algorithms and use cases. The [Model plan](IWAS_MODEL_PLAN.md) owns source/query/result contracts. The [UI/UX plan](IWAS_UI_UX_PLAN.md) owns presentation behavior; the [Presentation handoff](PRESENTATION_HANDOFF.md) records actual implementation. This document sequences future work and integration.
 
 ## 1. Architecture and completion levels
 

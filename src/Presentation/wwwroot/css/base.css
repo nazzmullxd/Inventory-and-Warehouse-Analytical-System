@@ -277,15 +277,6 @@ small {
   padding: 0 12px;
   color: #7c868c;
 }
-.demo-tag {
-  border: 1px solid #cedbd2;
-  background: #f2f7f3;
-  color: #476450;
-  border-radius: 4px;
-  padding: 4px 9px;
-  font-size: 0.71rem;
-  white-space: nowrap;
-}
 main {
   padding: 31px 32px 0;
   max-width: 1700px;
@@ -309,29 +300,4 @@ main {
   font-weight: 600;
   color: var(--muted);
   margin-bottom: 10px;
-}
-.sample-notice {
-  display: flex;
-  gap: 11px;
-  padding: 11px 14px;
-  background: #edf2f1;
-  border: 1px solid #d4dfdb;
-  border-radius: var(--radius);
-  font-size: 0.76rem;
-  color: #475d53;
-  margin-bottom: 24px;
-}
-.sample-notice strong {
-  font-weight: 600;
-}
-.info-symbol {
-  border: 1px solid currentColor;
-  border-radius: 50%;
-  height: 17px;
-  width: 17px;
-  min-width: 17px;
-  text-align: center;
-  line-height: 15px;
-  font-size: 0.7rem;
-  margin-top: 1px;
 }

@@ -8,9 +8,9 @@ Updated 9 September 2026. Current task: document Business and Model to support t
 2. `IWAS_PROJECT_PLAN.md` controls architecture and the active document map.
 3. `IWAS_BUSINESS_PLAN.md` owns use cases, calculations, statuses and Business tests.
 4. `IWAS_MODEL_PLAN.md` owns source mappings, query/result contracts and Model tests.
-5. `IWAS_UI_UX_PLAN.md` owns screen behavior; `README.md` and `docs/PRESENTATION_HANDOFF.md` record the actual fixture implementation.
+5. `IWAS_UI_UX_PLAN.md` owns screen behavior; `../README.md` and `PRESENTATION_HANDOFF.md` record the actual fixture implementation.
 6. `IWAS_BACKEND_IMPLEMENTATION_BLUEPRINT.md` owns the future backend/integration sequence; the earlier Presentation blueprint is historical planning context.
-7. `CSC470_Project09_Warehouse_Analytics.pdf` controls assignment requirements, formulas and examples.
+7. `../CSC470_Project09_Warehouse_Analytics.pdf` controls assignment requirements, formulas and examples.
 
 Archives are historical, never active commands. Mark SOURCE, OWNER, ASSUMPTION and RECOMMENDATION. Flag source conflicts instead of silently inventing behavior.
 

@@ -16,9 +16,7 @@
   .sidebar,
   .topbar,
   .page-heading,
-  .sample-notice,
   .report-toolbar,
-  .print-guidance,
   .workspace-footer,
   .skip-link,
   .scroll-hint,
@@ -103,9 +101,6 @@
   .report-footer {
     display: flex;
     flex-direction: row;
-  }
-  .report-watermark {
-    font-size: 10pt !important;
   }
   a {
     color: #000;

@@ -20,7 +20,6 @@ public class WorkspaceModel
     public string Item { get; set; } = "IT-1108";
     public string Requisition { get; set; } = "RQ-0871";
     public string Filter { get; set; } = "all";
-    public string Scenario { get; set; } = "success";
     public string Report { get; set; } = "R1";
     public bool Applied { get; set; }
     public string? Error { get; set; }

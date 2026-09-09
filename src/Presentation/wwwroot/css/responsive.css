@@ -177,16 +177,6 @@
   .topbar div span {
     padding: 0 5px;
   }
-  .demo-tag {
-    font-size: 0.63rem;
-  }
-  .context-list {
-    grid-template-columns: 1fr;
-    gap: 3px;
-  }
-  .context-list dd {
-    margin-bottom: 10px;
-  }
   .report-choice {
     padding: 14px;
   }
@@ -201,9 +191,6 @@
   }
   .report-footer {
     flex-direction: column;
-  }
-  .sample-notice {
-    font-size: 0.72rem;
   }
   .nav-item {
     display: flex;

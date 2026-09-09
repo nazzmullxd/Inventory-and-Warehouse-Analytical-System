@@ -61,15 +61,15 @@ npm test
 
 The runner writes screenshots, browser-generated print samples and results to ignored `test/Presentation/artifacts/`. Set `IWAS_URL` to test another local port. Node packages are test-only; the UI itself requires no npm dependencies.
 
-See [Presentation handoff](docs/PRESENTATION_HANDOFF.md) for evidence, design decisions and integration boundaries. The detailed design baseline is [IWAS_UI_UX_PLAN.md](IWAS_UI_UX_PLAN.md).
+See [Presentation handoff](docs/PRESENTATION_HANDOFF.md) for evidence, design decisions and integration boundaries. The detailed design baseline is [IWAS_UI_UX_PLAN.md](docs/IWAS_UI_UX_PLAN.md).
 
 ## Business implementation and Model foundation
 
 The 9 September 2026 plans remain the design baseline. The first executable Business increment implements BM-2 and the calculation portions of BM-4 through BM-7 without changing the working UI preview:
 
-- [Business plan](IWAS_BUSINESS_PLAN.md): analytical use cases, formulas, edge cases, result semantics and future tests.
-- [Model plan](IWAS_MODEL_PLAN.md): source records, typed contracts, read-only queries, mappings and consistency.
-- [Backend delivery plan](IWAS_BACKEND_IMPLEMENTATION_BLUEPRINT.md): phased implementation and replacement of display fixtures.
+- [Business plan](docs/IWAS_BUSINESS_PLAN.md): analytical use cases, formulas, edge cases, result semantics and future tests.
+- [Model plan](docs/IWAS_MODEL_PLAN.md): source records, typed contracts, read-only queries, mappings and consistency.
+- [Backend delivery plan](docs/IWAS_BACKEND_IMPLEMENTATION_BLUEPRINT.md): phased implementation and replacement of display fixtures.
 
 Run its dependency-free acceptance suite with:
 

@@ -3,12 +3,8 @@
 {
     <div class="notice notice-error" role="alert" tabindex="-1" id="validation-summary"><strong>Check your inputs</strong><p>@Model.Error <a href="#filters">Review the filter fields.</a></p></div>
 }
-else if (!Model.Available || Model.Scenario == "unavailable")
+else if (!Model.Available)
 {
-    <div class="notice" role="status"><strong>Results unavailable for this scope</strong><p>This preview has supplied examples for 08 Jul 2026; suppliers use Jan–Jun 2026, and requisitions use 08 Jul 2026. Check the sample identity and restore the sample filters to view them. No live service is connected.</p></div>
-}
-else if (Model.Scenario == "partial")
-{
-    <div class="notice" role="status"><strong>Some items could not be analyzed</strong><p>Illustrative partial state: one item could not be read. Unsafe totals and report output are withheld.</p></div>
+    <div class="notice" role="status"><strong>Results unavailable for this scope</strong><p>Adjust the date or filters to match the available warehouse records.</p></div>
 }
 <p id="request-status" class="visually-hidden" role="status" aria-live="polite"></p>

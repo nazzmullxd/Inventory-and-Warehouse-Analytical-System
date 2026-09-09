@@ -1,6 +1,6 @@
 ﻿# IWAS Presentation delivery blueprint
 
-Status: historical Presentation delivery plan from 5 September 2026. The fixture milestone is now implemented; see docs/PRESENTATION_HANDOFF.md. The current 9 September request is Business/Model documentation only; see IWAS_BACKEND_IMPLEMENTATION_BLUEPRINT.md for its future delivery sequence.
+Status: historical Presentation delivery plan from 5 September 2026. The fixture milestone is now implemented; see PRESENTATION_HANDOFF.md. The current 9 September request is Business/Model documentation only; see IWAS_BACKEND_IMPLEMENTATION_BLUEPRINT.md for its future delivery sequence.
 
 The [UI/UX plan](IWAS_UI_UX_PLAN.md) owns all detailed screen rules. The [project plan](IWAS_PROJECT_PLAN.md) owns scope and architecture. This blueprint sequences delivery without repeating those specifications. Historical backend work phases are archived and inactive.
 

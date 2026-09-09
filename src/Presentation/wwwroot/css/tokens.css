@@ -1,13 +1,32 @@
+@font-face {
+  font-family: "IWAS Plex";
+  src: url("../fonts/ibm-plex-sans/IBMPlexSans-Variable.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: swap;
+}
+
 :root {
-  --canvas: #f5f7f8;
+  --canvas: #F4F7F8;
   --surface: #fff;
-  --ink: #202a2f;
-  --muted: #5b6670;
-  --line: #d6dce1;
-  --primary: #146c43;
+  --ink: #102A3A;
+  --muted: #536779;
+  --line: #D5DEE2;
+  --primary: #167548;
+  --primary-hover: #105E39;
+  --text-muted: #72818E;
+  --sidebar: #1C2A30;
+  --surface-soft: #EEF4F3;
+  --text-xs: .6875rem;
+  --text-sm: .75rem;
+  --text-base: .875rem;
+  --text-lg: 1rem;
+  --text-section: 1.25rem;
+  --text-title: 2rem;
+  --text-kpi: 2.25rem;
   --focus: #0b63ce;
-  --success: #176b3a;
-  --success-bg: #e7f6ec;
+  --success: #167548;
+  --success-bg: #EAF4EF;
   --warning: #7a4d00;
   --warning-bg: #fff4ce;
   --info: #0b4f9c;
@@ -15,8 +34,8 @@
   --danger: #9f1c14;
   --danger-bg: #fdecec;
   --radius: 6px;
-  --font-ui: Lato, "Segoe UI", "Nirmala UI", Arial, sans-serif;
-  --font-editorial: "IBM Plex Serif", Lato, sans-serif;
+  --font-ui: "IWAS Plex", "Nirmala UI", Arial, sans-serif;
+  --font-editorial: var(--font-ui);
   --bs-body-font-family: var(--font-ui);
   --bs-body-color: var(--ink);
   --bs-body-bg: var(--canvas);

@@ -38,7 +38,7 @@ Business formulas remain in the source and archived documents rather than being 
 
 Original Markdown documents were copied unchanged to [the dated archive](archive/2026-09-05/). Their embedded implementation commands are inactive. The assignment PDF remains unchanged.
 
-Read [project plan](../IWAS_PROJECT_PLAN.md), [UI/UX plan](../IWAS_UI_UX_PLAN.md), then [delivery blueprint](../IWAS_IMPLEMENTATION_BLUEPRINT.md). The [master prompt](../Codex%20Master%20Prompt%20%E2%80%94%20IWAS.md) is the concise instruction entry point. Current UI decisions live in the UI/UX plan's decision register.
+Read [project plan](IWAS_PROJECT_PLAN.md), [UI/UX plan](IWAS_UI_UX_PLAN.md), then [delivery blueprint](IWAS_IMPLEMENTATION_BLUEPRINT.md). The [master prompt](Codex%20Master%20Prompt%20%E2%80%94%20IWAS.md) is the concise instruction entry point. Current UI decisions live in the UI/UX plan's decision register.
 
 ## 5. Validation scope
 

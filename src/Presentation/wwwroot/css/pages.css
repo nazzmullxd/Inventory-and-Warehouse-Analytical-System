@@ -88,11 +88,6 @@
 .report-toolbar .back-link {
   margin: 0;
 }
-.print-guidance {
-  font-size: 0.79rem;
-  color: var(--muted);
-  max-width: 850px;
-}
 .report-paper {
   max-width: 1000px;
   margin: 24px auto 32px;
@@ -136,11 +131,6 @@
   font-family: var(--font-editorial);
   font-weight: 600;
   letter-spacing: -0.01em;
-}
-.report-watermark {
-  letter-spacing: 1.3px;
-  font-size: 0.62rem !important;
-  margin: 18px 0 !important;
 }
 .report-scope,
 .report-paper > p {
