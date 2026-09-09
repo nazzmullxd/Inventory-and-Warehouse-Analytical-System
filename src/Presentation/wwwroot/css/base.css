@@ -5,6 +5,9 @@ body {
   margin: 0;
   font-size: 1rem;
   line-height: 1.55;
+  font-family: var(--font-ui);
+  font-variant-numeric: tabular-nums lining-nums;
+  text-rendering: optimizeLegibility;
 }
 a {
   color: var(--primary);
@@ -38,19 +41,19 @@ p {
 }
 h1 {
   font-size: 1.75rem;
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: -0.8px;
   margin-bottom: 8px;
 }
 h2 {
   font-size: 1.125rem;
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: -0.2px;
   margin-bottom: 8px;
 }
 h3 {
   font-size: 1rem;
-  font-weight: 650;
+  font-weight: 600;
 }
 p {
   margin-bottom: 12px;
@@ -303,7 +306,7 @@ main {
 .eyebrow {
   font-size: 0.625rem;
   letter-spacing: 1.6px;
-  font-weight: 650;
+  font-weight: 600;
   color: var(--muted);
   margin-bottom: 10px;
 }

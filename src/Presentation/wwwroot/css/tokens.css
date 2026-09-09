@@ -15,7 +15,9 @@
   --danger: #9f1c14;
   --danger-bg: #fdecec;
   --radius: 6px;
-  --bs-body-font-family: Inter, "Segoe UI", "Nirmala UI", Arial, sans-serif;
+  --font-ui: Lato, "Segoe UI", "Nirmala UI", Arial, sans-serif;
+  --font-editorial: "IBM Plex Serif", Lato, sans-serif;
+  --bs-body-font-family: var(--font-ui);
   --bs-body-color: var(--ink);
   --bs-body-bg: var(--canvas);
   --bs-border-color: var(--line);

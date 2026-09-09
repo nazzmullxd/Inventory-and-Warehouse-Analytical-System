@@ -43,3 +43,13 @@ Read [project plan](../IWAS_PROJECT_PLAN.md), [UI/UX plan](../IWAS_UI_UX_PLAN.md
 ## 5. Validation scope
 
 Check that all active local links resolve, the expected M1-M5/R1-R5 and UX-01 through UX-10 identifiers exist, exact folder names are consistent, and no source code/scaffolding was introduced. Future UI acceptance checks are documented only; there are no implemented screens or executed browser tests to report.
+
+## 6. Business and Model extension, 9 September 2026
+
+The owner requested Business and Model documentation based on the UI, in the same detailed style. The workspace now includes a .NET 8 Razor fixture preview, so this extension reviewed its README, handoff, controller, view models and display fixtures in addition to the active UI plan and relevant archived backend sections. The assignment content extracted during the earlier review remains the source reference; a fresh PDF extraction was unavailable because the previously used Python runtime is no longer present. The PDF is unchanged.
+
+Added dedicated Business and Model plans plus a backend delivery blueprint. Updated scope, prompt, document links and UI handoff notes to recognize the implemented Presentation milestone and authorize detailed backend planning only. No source/test implementation changed.
+
+Retained canonical requirements: M1-M5, all R1-R5, read-only records, exact source examples, source-gap labels and three-layer organization. Refined archived recommendations where needed: verified purchase-order identity instead of counting arbitrary delivery rows; item-specific supplier delay provenance; explicit distinction between raw reorder flag and safe recommendation text; unknown units block unsafe price/sufficiency; request-local consistency is distinct from replayable report snapshots; synthetic UI scores and unsupported number phrases are not algorithm requirements.
+
+Current reading order is project plan -> Business and Model plans -> backend delivery blueprint, with the UI plan/handoff for existing consumers. The earlier review and archive remain historical records; their UI-only scope no longer prohibits Business/Model documentation.

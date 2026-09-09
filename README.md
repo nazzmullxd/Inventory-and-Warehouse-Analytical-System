@@ -39,7 +39,7 @@ test/Presentation/       Browser, accessibility, viewport and print checks
 docs/                    Planning records and implementation handoff
 ```
 
-`src/Model` and `src/Business` remain future layers. No backend domain code, persistence, analytical algorithms, authentication service, or PDF engine was added. The minimal web host serves the Razor UI.
+`src/Model` contains immutable source, query, analytical, dashboard and R1–R5 report contracts; validation; consistent read metadata; limits; and a bounded read-only adapter. `src/Business` implements FIFO stock/valuation, supplier performance, reorder/EOQ/dead stock, requisition matching, dashboard composition, daily movement and full-scope orchestration. Presentation routes now call those typed use cases and render computed results from one coherent demonstration extract. A production persistence adapter, authentication service, and dedicated server-side PDF engine remain future work.
 
 ## Preview data
 
@@ -62,3 +62,25 @@ npm test
 The runner writes screenshots, browser-generated print samples and results to ignored `test/Presentation/artifacts/`. Set `IWAS_URL` to test another local port. Node packages are test-only; the UI itself requires no npm dependencies.
 
 See [Presentation handoff](docs/PRESENTATION_HANDOFF.md) for evidence, design decisions and integration boundaries. The detailed design baseline is [IWAS_UI_UX_PLAN.md](IWAS_UI_UX_PLAN.md).
+
+## Business implementation and Model foundation
+
+The 9 September 2026 plans remain the design baseline. The first executable Business increment implements BM-2 and the calculation portions of BM-4 through BM-7 without changing the working UI preview:
+
+- [Business plan](IWAS_BUSINESS_PLAN.md): analytical use cases, formulas, edge cases, result semantics and future tests.
+- [Model plan](IWAS_MODEL_PLAN.md): source records, typed contracts, read-only queries, mappings and consistency.
+- [Backend delivery plan](IWAS_BACKEND_IMPLEMENTATION_BLUEPRINT.md): phased implementation and replacement of display fixtures.
+
+Run its dependency-free acceptance suite with:
+
+```powershell
+dotnet run --project test/Business/Iwas.Business.Tests.csproj
+```
+
+Run the Model contract, validation, consistency and read-only checks with:
+
+```powershell
+dotnet run --project test/Model/Iwas.Model.Tests.csproj
+```
+
+The production Model adapter and authoritative source integration remain unimplemented. The included `IWAS-DEMO-2026-07-08` extract is explicitly read-only demonstration data; no production source is inferred from IDE extensions or earlier display fixtures.

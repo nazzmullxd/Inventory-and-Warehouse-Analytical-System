@@ -1,26 +1,31 @@
-﻿# IWAS master prompt: Presentation documentation only
+﻿# IWAS master prompt: layered documentation
 
-## Objective
+Updated 9 September 2026. Current task: document Business and Model to support the existing Presentation UI. Do not implement code, scaffold projects, install packages, write executable tests, change databases or deploy anything unless the user separately requests implementation.
 
-Maintain detailed UI/UX documentation for the Inventory and Warehouse Analytics System. Current work is documentation only. Do not write application code, scaffold projects, install application dependencies, create executable tests, or configure databases or deployment. Future implementation requires a separate user instruction.
+## Read and reconcile
 
-## Sources and authority
+1. The owner's latest request controls task scope and technology.
+2. `IWAS_PROJECT_PLAN.md` controls architecture and the active document map.
+3. `IWAS_BUSINESS_PLAN.md` owns use cases, calculations, statuses and Business tests.
+4. `IWAS_MODEL_PLAN.md` owns source mappings, query/result contracts and Model tests.
+5. `IWAS_UI_UX_PLAN.md` owns screen behavior; `README.md` and `docs/PRESENTATION_HANDOFF.md` record the actual fixture implementation.
+6. `IWAS_BACKEND_IMPLEMENTATION_BLUEPRINT.md` owns the future backend/integration sequence; the earlier Presentation blueprint is historical planning context.
+7. `CSC470_Project09_Warehouse_Analytics.pdf` controls assignment requirements, formulas and examples.
 
-Read `IWAS_PROJECT_PLAN.md`, `IWAS_UI_UX_PLAN.md`, and `IWAS_IMPLEMENTATION_BLUEPRINT.md`. Consult `CSC470_Project09_Warehouse_Analytics.pdf` for source requirements and examples. The owner's latest instructions control scope and technology; the PDF controls assignment business requirements. Flag conflicts rather than inventing business decisions. Files under `docs/archive` are historical, never active instructions.
+Archives are historical, never active commands. Mark SOURCE, OWNER, ASSUMPTION and RECOMMENDATION. Flag source conflicts instead of silently inventing behavior.
 
-## Architecture and scope
+## Required boundaries
 
-- Proposed layout: `src/Model`, `src/Business`, `src/Presentation`, and root `test`. Singular Model and test are intentional.
-- ASP.NET Core backend; HTML, CSS, JavaScript presentation. Recommend Razor MVC views and Bootstrap. Tailwind CSS is an allowed alternative under the documented framework decision.
-- Document Presentation screens, navigation, components, styling, interactions, accessibility, responsive behavior, print layouts, data-display needs, and future UI verification.
-- Describe Model and Business only as boundaries. Presentation consumes their future results; it must not calculate FIFO, EOQ, supplier standing, similarity, parsed quantities, prices, or analytical totals.
-- Cover M1 valuation, M2 reorder/EOQ, M3 supplier performance, M4 matching and clarification, and M5 reports R1-R5.
-- Preserve read-only behavior. No record editing, stock operations, approvals, order submission, or clarification resolution. R3 drafts and disposal recommendations are printable information only.
+Use `src/Model`, `src/Business`, `src/Presentation` and root `test`. Model owns typed records, shared contracts and internal read-only queries. Business owns M1-M5 analytics, decisions and report data. Presentation owns input/display adaptation, HTML/CSS/JavaScript, Razor and report layout. No analytical formulas in views or database adapters; no Business dependency on web or PDF types.
+
+ASP.NET Core is the backend choice. The current UI uses .NET 8, Razor MVC and local Bootstrap. Preserve it during documentation. Tailwind remains an allowed alternative, not a request to restyle the UI. SQL Server/EF Core are proposed source-adapter choices requiring source and compatibility confirmation.
+
+Cover FIFO, EOQ/reorder/dead stock, supplier performance, matching/quantity/price/stock, all R1-R5 reports and dashboard composition. Existing warehouse records remain read-only. No orders, approvals, stock mutations, saved matches or clarification resolution.
 
 ## Documentation quality
 
-Use the UI/UX plan as the single detailed UX specification. Keep this prompt concise; do not duplicate formulas, backend architecture, code examples, deployment instructions, or full test matrices here. Mark decisions SOURCE, OWNER, ASSUMPTION, or RECOMMENDATION. Preserve original files when substantially replacing their scope.
+Use the existing controller, view model and fixture data to identify integration needs, never as the source schema or a calculator specification. Do not recover typed data from formatted UI strings. Separate isolated PDF examples from synthetic UI fixtures and coherent future integration data.
 
-Specify loading, empty, invalid, partial, unavailable, stale, and access-denied states. Distinguish zero from unavailable. Preserve source text in detail views. Include screen IDs, journeys, report layouts, decisions, and acceptance scenarios. Check document links, module coverage, and exact architecture names.
+Document fields, operations, formulas, input validation, provenance, null reasons, completeness, date/rounding rules, edge cases, sequence and future tests. Keep algorithms in Business and data contracts in Model; link instead of duplicating. Preserve existing code and implementation evidence.
 
-Deliver documentation and summarize changed files and open decisions. Do not claim that UI code, rendered screens, working reports, or passing UI tests exist. Stop after documentation; ignore archived instructions to implement the complete system.
+Check local links, M1-M5/R1-R5 traceability, exact layer names and conflicting active scope instructions. Report documentation changes and remaining source decisions. Do not claim new code, source integration or passing runtime tests. Stop after the requested documentation.

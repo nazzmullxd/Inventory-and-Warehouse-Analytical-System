@@ -1,13 +1,16 @@
-﻿# IWAS project plan: Presentation documentation
+﻿# IWAS project plan: layered system documentation
 
-Status: documentation baseline, 5 September 2026. This document does not authorize implementation.
+Status: updated 9 September 2026. Presentation already exists as a fixture-based preview. The current request extends documentation to Business and Model; it does not authorize their implementation.
 
 ## 1. Purpose and document map
 
-IWAS helps warehouse staff inspect existing stock, supplier, and requisition data and print analytical reports. Current work defines only the Presentation UI/UX.
+IWAS helps warehouse staff inspect existing stock, supplier, and requisition data and print analytical reports. Current work defines Business and Model based on the existing Presentation UI/UX.
 
 | Document | Responsibility |
 |---|---|
+| [Business plan](IWAS_BUSINESS_PLAN.md) | Canonical use cases, calculations, decisions and Business tests |
+| [Model plan](IWAS_MODEL_PLAN.md) | Canonical source data, query/result contracts and Model tests |
+| [Backend delivery plan](IWAS_BACKEND_IMPLEMENTATION_BLUEPRINT.md) | Future Business/Model work and existing UI integration |
 | [UI/UX plan](IWAS_UI_UX_PLAN.md) | Canonical screens, components, interactions, reports, and acceptance scenarios |
 | [Delivery blueprint](IWAS_IMPLEMENTATION_BLUEPRINT.md) | Future Presentation work packages and gates |
 | [Master prompt](Codex%20Master%20Prompt%20%E2%80%94%20IWAS.md) | Concise documentation-only instructions |
@@ -19,22 +22,22 @@ The owner's current instructions govern scope and stack; the PDF governs busines
 
 ## 2. Current scope
 
-Document user journeys, navigation, screen and component specifications, responsive layouts, accessibility, UI copy, Presentation folder responsibilities, illustrative display fixtures, report layouts, and future UI checks.
+Document Business use cases and algorithms, Model source/query/result contracts, source-gap decisions, read-only guarantees, future tests, and the integration path from current display fixtures to real results. Preserve the existing UI design and implementation.
 
-Defer application code, scaffolding, packages, executable tests, Model internals, Business calculations, persistence, APIs, authentication services, PDF engine integration, CI/CD, and deployment. Future endpoint and data requirements are handoff notes only.
+Defer application code, scaffolding, packages, executable tests, database changes and deployment. Business calculations and Model internals are now documented, but remain unimplemented. Authentication and PDF engine implementation remain later work.
 
 ## 3. Layered architecture
 
 | Proposed location | Responsibility | Current work |
 |---|---|---|
-| `src/Model` | Future shared domain/data contracts; persistence details deferred | Boundary only |
-| `src/Business` | Future use cases and authoritative analytical decisions | Boundary only |
-| `src/Presentation` | ASP.NET Core web presentation, views, assets, display adaptation | Detailed UI/UX planning |
-| `test/Presentation` | Future rendering, interaction and accessibility verification | Scenarios only |
-| `test/Business`, `test/Model` | Future verification areas | Reserved, not designed |
+| `src/Model` | Source/read records, query/result contracts, internal read-only adapter | Detailed Model documentation |
+| `src/Business` | Use cases and authoritative analytical decisions | Detailed Business documentation |
+| `src/Presentation` | ASP.NET Core web presentation, views, assets, display adaptation | Existing fixture UI; design retained |
+| `test/Presentation` | Existing Presentation verification; future integration regression | No new test execution in this revision |
+| `test/Business`, `test/Model` | Future Model/Business verification | Detailed scenarios, no executable tests |
 | `docs` | Review records and supporting documentation | Active documentation |
 
-Dependency direction: Presentation -> Business -> Model. Presentation may consume agreed Model result contracts, but must not query stores or bypass Business. View models belong to Presentation and adapt computed results for display. No extra frontend application layer is required. Assembly names remain an implementation decision; folder names above are fixed. No source/test folders are scaffolded now.
+Dependency direction: Presentation -> Business -> Model. Presentation may consume agreed Model result contracts, but must not query stores or bypass Business. View models belong to Presentation and adapt computed results for display. No extra frontend application layer is required. Assembly names remain an implementation decision; folder names above are fixed. The existing Presentation source/test folders are retained; no new code is scaffolded now.
 
 ## 4. Technology decisions
 
@@ -52,4 +55,9 @@ RECOMMENDATION: dashboard and shared analytical shell. ASSUMPTION: login and mul
 
 ## 6. Documentation completion
 
-Each module and report must have a screen/layout specification, responsive behavior, states, and traceable acceptance scenarios. Architecture names must agree. Source gaps must be visible. The active prompt must remain documentation-only. Future implementation completion is a separate milestone in the delivery blueprint.
+Every module/report must map from Model data through a Business use case to an existing UI consumer and future acceptance checks. Source assumptions, calculations, failure states and layer ownership must be explicit. The active prompt remains documentation-only for the current request. The backend delivery plan separates pure calculations, verified source access and integrated UI completion.
+
+## 7. Current implementation and document authority
+
+The README and Presentation handoff describe the existing .NET 8 Razor/Bootstrap fixture UI. The 5 September UI plan is its design baseline, not a claim that no code exists today. Business and Model documentation now supersede earlier statements that those layers must only be mentioned as boundaries. Their detailed rules supersede conflicting archived recommendations; the UI plan still controls display behavior. Source business conflicts remain explicit decisions, never silently changed requirements.
+

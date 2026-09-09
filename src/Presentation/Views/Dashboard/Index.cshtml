@@ -1,28 +1,11 @@
 @model WorkspaceModel
-<form class="filter-band" id="filters" method="get">
-    <div class="field"><label for="date">Analysis date</label><input class="form-control" type="date" id="date" name="date" value="@Model.Date" required /></div>
-    <button class="btn btn-primary" name="apply" value="true">Apply date</button>
-    <a class="reset-link" href="/">Reset</a>
-</form>
+<form class="filter-band" method="get"><div class="field"><label for="date">Analysis date</label><input class="form-control" type="date" id="date" name="date" value="@Model.Date" required /></div><button class="btn btn-primary" name="apply" value="true">Apply date</button></form>
 <partial name="_Feedback" model="Model" />
-@if (Model.Available && Model.Error == null)
-{
-<div data-results>
-    <div class="section-heading"><h2>Warehouse overview</h2><span>As of @Model.DateLabel</span></div>
-    <div class="metric-grid dashboard-metrics">
-        <article class="metric featured"><p>Warehouse FIFO value</p><div class="metric-value"><small>BDT</small> 218,200<span>.00</span></div><p class="metric-context">Complete R2 sample scope</p><a href="@Model.ReportUrl("R2")">View valuation report <span aria-hidden="true">→</span></a></article>
-        <article class="metric"><p>Items to order today</p><div class="metric-value">1 <span class="status status-warning">Order now</span></div><p class="metric-context">R3 sample · @Model.DateLabel</p><a href="/reorder?date=@Model.Date">Review reorder needs <span aria-hidden="true">→</span></a></article>
-        <article class="metric"><p>Dead-stock items</p><div class="metric-value">1</div><p class="metric-context">No issue in 180 days · R4 sample</p><a href="/reorder?filter=dead&date=@Model.Date">Inspect dead stock <span aria-hidden="true">→</span></a></article>
-    </div>
-    <div class="period-metrics"><div><span class="status status-warning">1 watch-list supplier</span><span>01 Jan–30 Jun 2026 · R4 sample</span><a href="/suppliers/performance?filter=watch">Review suppliers →</a></div><div><span class="status status-warning">1 clarification</span><span>08 Jul 2026 · R5 sample</span><a href="/requisitions/clarifications">Inspect requisitions →</a></div></div>
-    <section class="panel">
-        <div class="panel-heading"><div><h2>Needs your attention</h2><p>A focused starting point for your next review.</p></div><span class="subtle-label">3 sample exceptions</span></div>
-        <div class="table-region" role="region" aria-label="Items needing attention" tabindex="0"><table class="table evidence-table"><caption>Attention items from separate illustrative module examples</caption><thead><tr><th scope="col">Type</th><th scope="col">Item / supplier / requisition</th><th scope="col">Condition</th><th scope="col">Status</th><th scope="col">Next step</th></tr></thead><tbody>
-            <tr><td><span class="type-label">Inventory</span></td><th scope="row">Toner Cartridge<small>IT-2201 · 08 Jul 2026</small></th><td>31 pieces in stock · ROP 34</td><td><span class="status status-warning">Order 45 now</span></td><td><a href="/reorder?filter=now&date=@Model.Date">View reorder →</a></td></tr>
-            <tr><td><span class="type-label">Supplier</span></td><th scope="row">Jamuna Supplies<small>SUP-08 · Jan–Jun 2026</small></th><td>71% of deliveries on time</td><td><span class="status status-warning">Watch list</span></td><td><a href="/suppliers/performance?filter=watch">View supplier →</a></td></tr>
-            <tr><td><span class="type-label">Requisition</span></td><th scope="row">RQ-0873<small>IT department · 08 Jul 2026</small></th><td>Best text similarity: 51%</td><td><span class="status status-warning">Clarification</span></td><td><a href="/requisitions/matching?requisition=RQ-0873&date=@Model.Date&apply=true">Inspect match →</a></td></tr>
-        </tbody></table></div>
-    </section>
-    <div class="bottom-grid"><section class="panel compact-panel"><p class="eyebrow">REPORTING</p><h2>From insight to a clear report</h2><p>Review stock, purchasing, supplier and requisition evidence in five consistent report layouts.</p><a href="/reports">Explore all reports →</a></section><section class="panel compact-panel"><p class="eyebrow">ANALYSIS CONTEXT</p><h2>Know what you’re looking at</h2><dl class="context-list"><dt>Source</dt><dd>Assignment examples + display fixtures</dd><dt>Data access</dt><dd>Read-only · no live connection</dd><dt>Sample snapshot</dt><dd>IWAS-DEMO-2026-07-08</dd></dl></section></div>
-</div>
-}
+@if (Model.Available && Model.Error == null) {
+<div data-results><div class="section-heading"><h2>Warehouse overview</h2><span>As of @Model.DateLabel</span></div>
+<div class="metric-grid dashboard-metrics">
+<article class="metric featured"><p>Warehouse FIFO value</p><div class="metric-value"><small>BDT</small> @Model.Metrics.GetValueOrDefault("value", "Unavailable")</div><a href="@Model.ReportUrl("R2")">View valuation report →</a></article>
+<article class="metric"><p>Items to order today</p><div class="metric-value">@Model.Metrics.GetValueOrDefault("order", "0")</div><a href="/reorder?date=@Model.Date">Review reorder needs →</a></article>
+<article class="metric"><p>Dead-stock items</p><div class="metric-value">@Model.Metrics.GetValueOrDefault("dead", "0")</div><a href="/reorder?filter=dead&date=@Model.Date">Inspect dead stock →</a></article>
+</div><div class="period-metrics"><div><span class="status status-warning">@Model.Metrics.GetValueOrDefault("watch", "0") watch-list suppliers</span><a href="/suppliers/performance?filter=watch">Review suppliers →</a></div><div><span class="status status-warning">@Model.Metrics.GetValueOrDefault("clarification", "0") clarifications</span><a href="/requisitions/clarifications">Inspect requisitions →</a></div></div>
+<section class="panel compact-panel"><h2>Analysis context</h2><dl class="context-list"><dt>Source</dt><dd>Coherent read-only demonstration snapshot</dd><dt>Snapshot</dt><dd>@Model.Snapshot</dd><dt>Read time</dt><dd>@Model.GeneratedAt</dd></dl></section></div> }

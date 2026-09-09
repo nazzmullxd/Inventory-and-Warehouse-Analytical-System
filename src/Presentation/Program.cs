@@ -1,5 +1,23 @@
+using Iwas.Business.Abstractions;
+using Iwas.Business.Dashboard;
+using Iwas.Business.Matching;
+using Iwas.Business.Reorder;
+using Iwas.Business.Stock;
+using Iwas.Business.Suppliers;
+using Iwas.Business.Valuation;
+using Iwas.Model.Data.InMemory;
+using Iwas.Model.Repositories;
+using Iwas.Presentation.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<IWarehouseReadStore>(_ => new InMemoryWarehouseReadStore(DemoWarehouse.Create()));
+builder.Services.AddSingleton<StockLedgerService>();
+builder.Services.AddSingleton<FifoValuationService>();
+builder.Services.AddSingleton<SupplierPerformanceService>();
+builder.Services.AddSingleton<ReorderService>();
+builder.Services.AddSingleton<RequisitionMatchingService>();
+builder.Services.AddScoped<IWarehouseAnalytics, WarehouseAnalyticsService>();
 var app = builder.Build();
 app.UseExceptionHandler("/errors/unavailable");
 app.UseStaticFiles();

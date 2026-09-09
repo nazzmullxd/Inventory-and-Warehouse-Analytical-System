@@ -4,4 +4,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Business\Iwas.Business.csproj" />
+    <ProjectReference Include="..\Model\Iwas.Model.csproj" />
+  </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
-# IWAS detailed UI/UX plan
+﻿# IWAS detailed UI/UX plan
 
-Status: proposed Presentation design baseline, 5 September 2026. Documentation only; no screens or code have been implemented. Read with the [project scope](IWAS_PROJECT_PLAN.md) and [delivery blueprint](IWAS_IMPLEMENTATION_BLUEPRINT.md).
+Status: Presentation design baseline from 5 September 2026. The fixture UI was subsequently implemented; see README and the Presentation handoff. As of 9 September, current work is Business/Model documentation only. Read with the [project scope](IWAS_PROJECT_PLAN.md) and [delivery blueprint](IWAS_IMPLEMENTATION_BLUEPRINT.md).
 
 ## 1. Experience goals and authority
 
@@ -364,3 +364,10 @@ Browser matrix: Edge, Chrome, Firefox and Safari where available; record version
 Meaningful future tests cover zero/null rendering, filters/URL restoration, request races, partial data, accessible lookup, role variants, report scope and print overflow. Do not recalculate business formulas in UI tests or merely mirror markup. Verify essential no-JavaScript journeys when real server rendering is integrated.
 
 Future UI completion requires applicable UX-01 through UX-10, all M1-M5/R1-R5 coverage, reviewed journeys, no clipped controls outside allowed table scrolling, resolved critical accessibility issues, and inspected A4 output. Separate fixture-only from integrated evidence. Current completion is documentation, not these future implementation claims.
+
+## 15. Business and Model documentation handoff, 9 September 2026
+
+The [Business plan](IWAS_BUSINESS_PLAN.md) now owns analytical behavior and defaults behind the screens. The [Model plan](IWAS_MODEL_PLAN.md) owns typed source/query/result contracts. The [backend delivery plan](IWAS_BACKEND_IMPLEMENTATION_BLUEPRINT.md) maps them to the existing fixture implementation. Earlier prohibitions on designing Business/Model internals applied only to the UI documentation milestone and are superseded by the current request. No UI code changes are made in this documentation revision.
+
+Section 13 source gaps now have explicit proposed defaults in those plans. Unknown unit compatibility must not produce authoritative pricing/sufficiency. Candidate stock in a tied result must be labeled candidate-only or omitted. Synthetic display scores and number phrases are not mandatory algorithm results; retain honest unavailable states when real interpretation differs.
+
