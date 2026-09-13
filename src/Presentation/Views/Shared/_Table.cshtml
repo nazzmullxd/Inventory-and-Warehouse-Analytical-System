@@ -1,23 +1,59 @@
-@model DataTable
-<p class="scroll-hint">Scroll horizontally to inspect all columns when needed.</p>
-<div class="table-region" role="region" aria-label="@Model.Caption" tabindex="0">
-<table class="table evidence-table">
-    <caption>@Model.Caption</caption>
-    <thead><tr>@foreach (var column in Model.Headers) {<th scope="col">@column</th>}</tr></thead>
-    <tbody>
-    @foreach (var row in Model.Rows)
-    {
-        <tr>@for (var i = 0; i < row.Length; i++) {
-            if (i == 0) {<th scope="row">@row[i]</th>}
-            else {
-                var tone = row[i] is "Order 45 now" or "Clarification" or "Watch list" ? "warning" : row[i] is "Good" or "Excellent" or "OK" or "Priced, in stock" ? "success" : row[i] == "Order in 3 days" ? "info" : "";
-                var numeric = char.IsDigit(row[i].FirstOrDefault()) || row[i].StartsWith("BDT ") || row[i].StartsWith("≈ ");
-                <td class="@(numeric ? "numeric-cell" : null)">@if (tone != "") {<span class="status status-@tone">@row[i]</span>} else {@row[i]}</td>
-            }
-        }</tr>
-    }
-    </tbody>
-    @if (Model.Footer != null) {<tfoot><tr><td colspan="@Model.Headers.Length">@Model.Footer</td></tr></tfoot>}
-</table>
-@if (Model.Rows.Length == 0) {<p class="empty-state">No records for these filters.</p>}
+﻿@model DataTable
+@{
+    // Alignment is display-only; values and analytical outcomes are never changed here.
+    bool IsNumeric(string value) => char.IsDigit(value.FirstOrDefault()) || value.StartsWith("BDT ") || value.StartsWith("≈ ");
+    var numericColumns = Enumerable.Range(0, Model.Headers.Length)
+        .Select(i => Model.Rows.Length > 0 && Model.Rows.All(row => IsNumeric(row[i]) || row[i] == "N/A"))
+        .ToArray();
+}
+<div class="table-heading">
+    <h2>@Model.Caption</h2>
+    <span class="table-count">@Model.Rows.Length @(Model.Rows.Length == 1 ? "record" : "records")</span>
 </div>
+<div class="table-region" role="region" aria-label="@Model.Caption" tabindex="0">
+    <table class="table evidence-table">
+        <caption class="visually-hidden">@Model.Caption</caption>
+        <thead>
+            <tr>
+                @for (var i = 0; i < Model.Headers.Length; i++)
+                {
+                    <th scope="col" class="@(numericColumns[i] ? "numeric-cell" : null)">@Model.Headers[i]</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in Model.Rows)
+            {
+                <tr>
+                    @for (var i = 0; i < row.Length; i++)
+                    {
+                        if (i == 0)
+                        {
+                            <th scope="row" class="@(numericColumns[i] ? "numeric-cell" : null)">@row[i]</th>
+                        }
+                        else
+                        {
+                            var tone = row[i] is "Clarification" or "Watch list" or "Review dead stock" or "Review no demand"
+                                || row[i].StartsWith("Order ") && row[i].EndsWith(" now") ? "warning"
+                                : row[i] is "Good" or "Excellent" or "OK" or "Priced, in stock" or "Matched" ? "success"
+                                : row[i].StartsWith("Order in ") ? "info" : "";
+                            <td class="@(numericColumns[i] ? "numeric-cell" : null)">
+                                @if (tone != "") { <span class="status status-@tone">@row[i]</span> }
+                                else { @row[i] }
+                            </td>
+                        }
+                    }
+                </tr>
+            }
+        </tbody>
+        @if (Model.Footer != null)
+        {
+            <tfoot><tr><td colspan="@Model.Headers.Length">@Model.Footer</td></tr></tfoot>
+        }
+    </table>
+    @if (Model.Rows.Length == 0)
+    {
+        <p class="empty-state">No records for these filters.</p>
+    }
+</div>
+<p class="scroll-hint"><partial name="_Icon" model='"arrows-horizontal"' /> Scroll horizontally to see all columns.</p>

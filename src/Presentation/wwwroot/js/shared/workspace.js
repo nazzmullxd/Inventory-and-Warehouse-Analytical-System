@@ -14,6 +14,17 @@
     toggle.setAttribute("aria-expanded", String(!nav.hidden));
   });
 
+  // Keep table regions keyboard accessible; show guidance only for horizontal overflow.
+  const tables = document.querySelectorAll(".table-region");
+  const updateTables = () => tables.forEach((region) => {
+    const scrolls = region.scrollWidth > region.clientWidth + 1;
+    const hint = region.nextElementSibling;
+    if (hint?.classList.contains("scroll-hint")) hint.hidden = !scrolls;
+  });
+  const tableObserver = new ResizeObserver(updateTables);
+  tables.forEach((region) => tableObserver.observe(region));
+  document.fonts.ready.then(updateTables);
+
   const form = document.getElementById("filters");
   const results = document.querySelector("[data-results]");
   const status = document.getElementById("request-status");

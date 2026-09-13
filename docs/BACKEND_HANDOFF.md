@@ -1,5 +1,7 @@
 # IWAS backend implementation handoff
 
+Update, 10 September 2026: the runtime now uses XAMPP MySQL via a read-only Model adapter. Database `iwas` persists the demonstration dataset. Schema, setup, credentials, consistency and remaining production-data limitations are documented in [database setup](DATABASE_SETUP.md). The historical status below describes the preceding in-memory integration.
+
 Status: implemented demonstration integration, 9 September 2026.
 
 The ASP.NET Core host now references Model and Business directly in the required dependency direction. All analytical routes resolve `IWarehouseAnalytics`; controller mapping formats typed values for Razor. `DisplayFixtures` is retained only as historical source material and is no longer read by the active analytical views or controller.

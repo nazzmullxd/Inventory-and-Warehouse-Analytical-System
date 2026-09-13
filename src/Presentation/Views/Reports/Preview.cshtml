@@ -1,5 +1,33 @@
-@model WorkspaceModel
-<div class="report-toolbar"><a class="back-link" href="/reports?report=@Model.Report&date=@Model.Date&start=@Model.Start&end=@Model.End">← Back to reports</a>@if (Model.Available && Model.Error == null) {<button type="button" class="btn btn-primary" id="print-report">Print report</button>}</div>
+﻿@model WorkspaceModel
+<div class="report-toolbar">
+    <a class="back-link" href="/reports?report=@Model.Report&date=@Model.Date&start=@Model.Start&end=@Model.End"><partial name="_Icon" model='"arrow-left"' /> Back to reports</a>
+    @if (Model.Available && Model.Error == null)
+    {
+        <button type="button" class="btn btn-primary" id="print-report"><partial name="_Icon" model='"print"' /> Print report</button>
+    }
+</div>
 <partial name="_Feedback" model="Model" />
-@if (Model.Available && Model.Error == null) {<article class="report-paper" data-results><header class="report-heading"><div class="report-brand">PADMA TRADING LTD <span>Warehouse Operations</span></div><p>Inventory &amp; Warehouse Analytics System</p><div class="report-title"><h2>@Model.Title</h2><span>@Model.Report</span></div><p>@(Model.Report == "R4" ? $"Supplier period: {Model.PeriodLabel} · Stock date: {Model.DateLabel}" : $"Date: {Model.DateLabel}")</p></header>@if (Model.PrimaryTable != null) {<partial name="_Table" model="Model.PrimaryTable" />}@if (Model.SecondaryTable != null) {<h3 class="report-subheading">Dead stock and disposal review</h3><partial name="_Table" model="Model.SecondaryTable" />}<footer class="report-footer"><span>Prepared: @Model.GeneratedAt</span><span>Report @Model.Report</span></footer></article>}
-@section Scripts {<script src="~/js/pages/reports.js" asp-append-version="true" defer></script>}
+@if (Model.Available && Model.Error == null)
+{
+    <article class="report-paper" data-results>
+        <header class="report-heading">
+            <div class="report-brand">PADMA TRADING LTD <span>Warehouse Operations</span></div>
+            <p>Inventory &amp; Warehouse Analytics System</p>
+            <div class="report-title"><h2>@Model.Title</h2><span>@Model.Report</span></div>
+            <p>@(Model.Report == "R4" ? $"Supplier period: {Model.PeriodLabel} · Stock date: {Model.DateLabel}" : $"Date: {Model.DateLabel}")</p>
+        </header>
+        @if (Model.PrimaryTable != null)
+        {
+            <partial name="_Table" model="Model.PrimaryTable" />
+        }
+        @if (Model.SecondaryTable != null)
+        {
+            <h3 class="report-subheading">Dead stock and disposal review</h3>
+            <partial name="_Table" model="Model.SecondaryTable" />
+        }
+        <footer class="report-footer"><span>Prepared: @Model.GeneratedAt</span><span>Report @Model.Report</span></footer>
+    </article>
+}
+@section Scripts {
+    <script src="~/js/pages/reports.js" asp-append-version="true" defer></script>
+}

@@ -1,10 +1,42 @@
-@model WorkspaceModel
-<form class="filter-band" method="get"><div class="field"><label for="date">Analysis date</label><input class="form-control" type="date" id="date" name="date" value="@Model.Date" required /></div><button class="btn btn-primary" name="apply" value="true">Apply date</button></form>
+﻿@model WorkspaceModel
+<form class="filter-band" method="get">
+    <div class="field">
+        <label for="date">Analysis date</label>
+        <input class="form-control" type="date" id="date" name="date" value="@Model.Date" required />
+    </div>
+    <button class="btn btn-primary" name="apply" value="true"><partial name="_Icon" model='"calendar"' /> Apply date</button>
+</form>
 <partial name="_Feedback" model="Model" />
-@if (Model.Available && Model.Error == null) {
-<div data-results><div class="section-heading"><h2>Warehouse overview</h2><span>As of @Model.DateLabel</span></div>
-<div class="metric-grid dashboard-metrics">
-<article class="metric featured"><p>Warehouse FIFO value</p><div class="metric-value"><small>BDT</small> @Model.Metrics.GetValueOrDefault("value", "Unavailable")</div><a href="@Model.ReportUrl("R2")">View valuation report →</a></article>
-<article class="metric"><p>Items to order today</p><div class="metric-value">@Model.Metrics.GetValueOrDefault("order", "0")</div><a href="/reorder?date=@Model.Date">Review reorder needs →</a></article>
-<article class="metric"><p>Dead-stock items</p><div class="metric-value">@Model.Metrics.GetValueOrDefault("dead", "0")</div><a href="/reorder?filter=dead&date=@Model.Date">Inspect dead stock →</a></article>
-</div><div class="period-metrics"><div><span class="status status-warning">@Model.Metrics.GetValueOrDefault("watch", "0") watch-list suppliers</span><a href="/suppliers/performance?filter=watch">Review suppliers →</a></div><div><span class="status status-warning">@Model.Metrics.GetValueOrDefault("clarification", "0") clarifications</span><a href="/requisitions/clarifications">Inspect requisitions →</a></div></div></div> }
+@if (Model.Available && Model.Error == null)
+{
+    <div data-results>
+        <div class="section-heading"><h2>Warehouse overview</h2><span>As of @Model.DateLabel</span></div>
+        <div class="metric-grid dashboard-metrics">
+            <article class="metric featured">
+                <p>Warehouse FIFO value <span class="metric-icon"><partial name="_Icon" model='"layers"' /></span></p>
+                <div class="metric-value"><small>BDT</small> @Model.Metrics.GetValueOrDefault("value", "Unavailable")</div>
+                <a href="@Model.ReportUrl("R2")">View valuation report <partial name="_Icon" model='"arrow-right"' /></a>
+            </article>
+            <article class="metric">
+                <p>Items to order today <span class="metric-icon"><partial name="_Icon" model='"reorder"' /></span></p>
+                <div class="metric-value">@Model.Metrics.GetValueOrDefault("order", "0")</div>
+                <a href="/reorder?date=@Model.Date">Review reorder needs <partial name="_Icon" model='"arrow-right"' /></a>
+            </article>
+            <article class="metric">
+                <p>Dead-stock items <span class="metric-icon"><partial name="_Icon" model='"archive"' /></span></p>
+                <div class="metric-value">@Model.Metrics.GetValueOrDefault("dead", "0")</div>
+                <a href="/reorder?filter=dead&date=@Model.Date">Inspect dead stock <partial name="_Icon" model='"arrow-right"' /></a>
+            </article>
+        </div>
+        <div class="period-metrics">
+            <div>
+                <span class="status status-warning">@Model.Metrics.GetValueOrDefault("watch", "0") watch-list suppliers</span>
+                <a href="/suppliers/performance?filter=watch">Review suppliers <partial name="_Icon" model='"arrow-right"' /></a>
+            </div>
+            <div>
+                <span class="status status-warning">@Model.Metrics.GetValueOrDefault("clarification", "0") clarifications</span>
+                <a href="/requisitions/clarifications">Inspect requisitions <partial name="_Icon" model='"arrow-right"' /></a>
+            </div>
+        </div>
+    </div>
+}

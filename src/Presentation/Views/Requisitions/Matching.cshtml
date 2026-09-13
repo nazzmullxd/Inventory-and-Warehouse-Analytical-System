@@ -1,7 +1,47 @@
-@model WorkspaceModel
+﻿@model WorkspaceModel
 @{ var match = Model.MatchResult; }
-<a class="back-link" href="@Model.ReturnUrl">← Back to clarification results</a>
-<form class="filter-band" method="get"><input type="hidden" name="returnUrl" value="@Model.ReturnUrl" /><div class="field field-wide"><label for="requisition">Existing requisition ID</label><input class="form-control" id="requisition" name="requisition" value="@Model.Requisition" required /></div><div class="field"><label for="date">Stock as-of date</label><input class="form-control" type="date" id="date" name="date" value="@Model.Date" required /></div><button class="btn btn-primary" name="apply" value="true">Run matching</button></form>
+<a class="back-link" href="@Model.ReturnUrl"><partial name="_Icon" model='"arrow-left"' /> Back to clarification results</a>
+<form class="filter-band" method="get">
+    <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+    <div class="field field-wide">
+        <label for="requisition">Existing requisition ID</label>
+        <input class="form-control" id="requisition" name="requisition" value="@Model.Requisition" required />
+    </div>
+    <div class="field">
+        <label for="date">Stock as-of date</label>
+        <input class="form-control" type="date" id="date" name="date" value="@Model.Date" required />
+    </div>
+    <button class="btn btn-primary" name="apply" value="true"><partial name="_Icon" model='"match"' /> Run matching</button>
+</form>
 <partial name="_Feedback" model="Model" />
-@if (!Model.Applied && Model.Error == null) {<div class="panel empty-state"><h2>Ready to inspect the match</h2></div>}
-@if (Model.Applied && Model.Available && match != null) {<div data-results><section class="panel source-panel"><p class="eyebrow">EXISTING REQUISITION</p><h2>@match.Id <span class="id-label">@match.Department</span></h2><blockquote>@(match.Text == "" ? "No requisition text was supplied." : match.Text)</blockquote></section><section class="panel compact-panel"><div class="section-heading"><h2>@match.Item</h2><span class="status @(match.Status == "Matched" ? "status-success" : "status-warning")">@match.Status</span></div><p><strong>@match.Similarity text similarity</strong> · @match.Reason</p></section><div class="metric-grid match-metrics"><article class="metric"><p>Parsed quantity</p><strong>@match.Quantity</strong></article><article class="metric"><p>Catalogue price</p><strong>@match.Price</strong></article><article class="metric"><p>Total</p><strong>@match.Total</strong></article><article class="metric"><p>Stock</p><strong>@match.Stock</strong><p>@match.Sufficiency</p></article></div>@if (Model.PrimaryTable != null) {<section class="panel"><partial name="_Table" model="Model.PrimaryTable" /></section>}</div>}
+@if (!Model.Applied && Model.Error == null)
+{
+    <div class="panel empty-state"><partial name="_Icon" model='"search"' /><h2>Ready to inspect the match</h2></div>
+}
+@if (Model.Applied && Model.Available && match != null)
+{
+    <div data-results>
+        <section class="panel source-panel">
+            <p class="eyebrow">EXISTING REQUISITION</p>
+            <h2>@match.Id <span class="id-label">@match.Department</span></h2>
+            <blockquote>@(match.Text == "" ? "No requisition text was supplied." : match.Text)</blockquote>
+        </section>
+        <section class="panel compact-panel">
+            <div class="section-heading">
+                <h2>@match.Item</h2>
+                <span class="status @(match.Status == "Matched" ? "status-success" : "status-warning")">@match.Status</span>
+            </div>
+            <p><strong>@match.Similarity text similarity</strong> · @match.Reason</p>
+        </section>
+        <div class="metric-grid match-metrics">
+            <article class="metric"><p>Parsed quantity</p><strong>@match.Quantity</strong></article>
+            <article class="metric"><p>Catalogue price</p><strong>@match.Price</strong></article>
+            <article class="metric"><p>Total</p><strong>@match.Total</strong></article>
+            <article class="metric"><p>Stock</p><strong>@match.Stock</strong><p>@match.Sufficiency</p></article>
+        </div>
+        @if (Model.PrimaryTable != null)
+        {
+            <section class="panel"><partial name="_Table" model="Model.PrimaryTable" /></section>
+        }
+    </div>
+}

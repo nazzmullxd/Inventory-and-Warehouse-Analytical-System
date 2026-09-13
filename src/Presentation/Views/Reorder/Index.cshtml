@@ -1,4 +1,30 @@
-@model WorkspaceModel
-<form class="filter-band" method="get"><div class="field"><label for="date">Analysis date</label><input class="form-control" type="date" id="date" name="date" value="@Model.Date" required /></div><div class="field field-wide"><label for="filter">Recommendation / dead stock</label><select class="form-select" id="filter" name="filter"><option value="all" selected="@(Model.Filter == "all")">All recommendations</option><option value="now" selected="@(Model.Filter == "now")">Order now</option><option value="projected" selected="@(Model.Filter == "projected")">Projected order</option><option value="ok" selected="@(Model.Filter == "ok")">OK</option><option value="dead" selected="@(Model.Filter == "dead")">Dead stock</option></select></div><button class="btn btn-primary" name="apply" value="true">Analyze</button></form>
+﻿@model WorkspaceModel
+<form class="filter-band" method="get">
+    <div class="field">
+        <label for="date">Analysis date</label>
+        <input class="form-control" type="date" id="date" name="date" value="@Model.Date" required />
+    </div>
+    <div class="field field-wide">
+        <label for="filter">Recommendation / dead stock</label>
+        <select class="form-select" id="filter" name="filter">
+            <option value="all" selected="@(Model.Filter == "all")">All recommendations</option>
+            <option value="now" selected="@(Model.Filter == "now")">Order now</option>
+            <option value="projected" selected="@(Model.Filter == "projected")">Projected order</option>
+            <option value="ok" selected="@(Model.Filter == "ok")">OK</option>
+            <option value="dead" selected="@(Model.Filter == "dead")">Dead stock</option>
+        </select>
+    </div>
+    <button class="btn btn-primary" name="apply" value="true"><partial name="_Icon" model='"reorder"' /> Analyze</button>
+</form>
 <partial name="_Feedback" model="Model" />
-@if (Model.Available && Model.Error == null && Model.PrimaryTable != null) {<div data-results><div class="section-heading"><div><h2>Purchasing outlook</h2><p>@Model.DateLabel · all items before filter</p></div><a class="btn btn-outline-secondary" href="@Model.ReportUrl("R3")">View report ↗</a></div><section class="panel"><partial name="_Table" model="Model.PrimaryTable" /></section><div class="notice neutral"><strong>Purchasing control</strong><p>No purchase order is created from this screen.</p></div></div>}
+@if (Model.Available && Model.Error == null && Model.PrimaryTable != null)
+{
+    <div data-results>
+        <div class="section-heading">
+            <div><h2>Purchasing outlook</h2><p>@Model.DateLabel · all items before filter</p></div>
+            <a class="btn btn-outline-secondary" href="@Model.ReportUrl("R3")"><partial name="_Icon" model='"report"' /> View report</a>
+        </div>
+        <section class="panel"><partial name="_Table" model="Model.PrimaryTable" /></section>
+        <div class="notice neutral"><strong>Purchasing control</strong><p>No purchase order is created from this screen.</p></div>
+    </div>
+}

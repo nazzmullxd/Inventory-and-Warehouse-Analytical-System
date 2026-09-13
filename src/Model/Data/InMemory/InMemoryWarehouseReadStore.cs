@@ -41,8 +41,10 @@ public sealed class InMemoryWarehouseReadStore : IWarehouseReadStore
         var metadata = new ReadContextMetadata(_snapshot.SourceVersion, "canonical-v1", DateTimeOffset.UtcNow,
             _snapshot.SourceVersion, ConsistencyMode.ImmutableExtract, _snapshot.ReliableHistoryStart,
             _snapshot.HasTrustedOpeningStock, _snapshot.SourceName);
-        return ValueTask.FromResult<IWarehouseReadContext>(new Context(_snapshot, _limits, metadata));
+        return ValueTask.FromResult(CreateContext(metadata));
     }
+
+    internal IWarehouseReadContext CreateContext(ReadContextMetadata metadata) => new Context(_snapshot, _limits, metadata);
 
     private sealed class Context : IWarehouseReadContext
     {

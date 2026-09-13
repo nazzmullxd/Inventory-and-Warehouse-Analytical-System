@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <Content Update="appsettings.Local.json" CopyToPublishDirectory="Never" />
     <ProjectReference Include="..\Business\Iwas.Business.csproj" />
     <ProjectReference Include="..\Model\Iwas.Model.csproj" />
   </ItemGroup>

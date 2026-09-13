@@ -1,86 +1,43 @@
-# IWAS Presentation
+﻿# IWAS — Inventory and Warehouse Analytics System
 
-Implemented UI/UX preview for the Inventory and Warehouse Analytics System. Uses ASP.NET Core 8, Razor MVC, local Bootstrap 5.3.8, and plain CSS/JavaScript.
+ASP.NET Core 8 / Razor MVC application with Model, Business and Presentation layers. Analytics now read a persistent **XAMPP MySQL** database through a read-only account. The initial database contains the existing demonstration dataset.
 
-The owner's implementation request supersedes the earlier documentation-only milestone in the planning files. This deliverable is **Presentation with labeled display fixtures**, not an integrated analytics system. The original plans and assignment remain preserved.
+## Database setup
 
-## Run
-
-Requires the .NET 8 SDK. From the repository root:
+Start **MySQL** in XAMPP Control Panel, then run from the repository root:
 
 ```powershell
+./database/setup.ps1
 dotnet run --project src/Presentation/Iwas.Presentation.csproj --urls http://127.0.0.1:5080
 ```
 
-Open http://127.0.0.1:5080. No frontend build, database, account, or external asset connection is required.
+Requires the .NET 8 SDK. This workspace also has a local SDK: replace `dotnet` with `./.tools/dotnet/dotnet.exe` if needed. Open http://127.0.0.1:5080. ASP.NET Core runs independently of XAMPP Apache.
+
+Setup creates database `iwas`, five InnoDB tables, the demonstration records, and a SELECT-only `iwas_reader` account. Its generated password is stored in ignored `src/Presentation/appsettings.Local.json`. Rerunning setup preserves existing data and configuration. See [database setup](docs/DATABASE_SETUP.md) for credentials, schema, verification and limitations.
+
+## Features and sample scopes
+
+The Business layer computes FIFO stock valuation, supplier performance, reorder/EOQ/dead stock, requisition matching, warehouse dashboard and R1–R5 report data. Razor renders typed results; browser printing provides report previews.
+
+Use **8 July 2026**, item **IT-1108**, requisition **RQ-0871**, and supplier period **1 January–30 June 2026**. The expanded seed contains 25 items, 287 movements, 165 delivery records across 9 suppliers, and 52 requisitions. To upgrade an original demo database without replacing its records, run `./database/setup.ps1 -AddDemoData`; reruns do not duplicate rows. The UI retains its demonstration date limit. Real operational data, verified coverage, authentication and a dedicated server-side PDF engine remain future work.
 
 ## Organization
 
-```text
-src/Presentation/
-  Controllers/           Read-only view routing and input validation
-  Fixtures/              Display-ready examples; no calculations
-  ViewModels/            Presentation contracts and date formatting
-  Views/
-    Shared/              Shell, navigation, tables, feedback, state controls
-    Dashboard/           Warehouse overview
-    StockValuation/      FIFO presentation
-    Reorder/             Reorder, EOQ and dead-stock presentation
-    Suppliers/           Delivery reliability presentation
-    Requisitions/        Matching and clarification views
-    Reports/             Report selection and R1–R5 HTML previews
-    Errors/              Missing, forbidden and unavailable views
-  wwwroot/
-    css/                 Tokens, base/shell, components, pages, responsive, print
-    js/shared/           Navigation, validation and URL-context restoration
-    js/pages/            Report printing interaction
-    vendor/bootstrap/    Pinned local CSS and upstream license
-test/Presentation/       Browser, accessibility, viewport and print checks
-docs/                    Planning records and implementation handoff
-```
-
-`src/Model` contains immutable source, query, analytical, dashboard and R1–R5 report contracts; validation; consistent read metadata; limits; and a bounded read-only adapter. `src/Business` implements FIFO stock/valuation, supplier performance, reorder/EOQ/dead stock, requisition matching, dashboard composition, daily movement and full-scope orchestration. Presentation routes now call those typed use cases and render computed results from one coherent demonstration extract. A production persistence adapter, authentication service, and dedicated server-side PDF engine remain future work.
-
-## Preview data
-
-Use **08 Jul 2026** for analysis and requisitions; suppliers use **01 Jan–30 Jun 2026**. Other scopes display unavailable results instead of relabeling the sample data. A4 Paper uses `IT-1108`; matching supports `RQ-0871` through `RQ-0880`.
-
-“Preview display states” exposes empty, partial and unavailable examples. The matching scenarios include low similarity, tied candidates, Unicode, empty text, missing quantity/price, zero stock and insufficient stock. Report previews explicitly identify their scope and sample status. “Print sample” uses browser printing; PDF download remains a future integration.
+- `src/Model`: source/result contracts, validation and database read adapter.
+- `src/Business`: analytical calculations and report orchestration.
+- `src/Presentation`: MVC routes, Razor views, CSS and JavaScript.
+- `database`: schema and repeatable administrative setup tool.
+- `test/Model`, `test/Business`, `test/Database`: acceptance and database checks.
+- `test/Presentation`: browser/accessibility checks; some legacy fixture assertions predate the computed analytics integration.
+- `docs`: plans and implementation handoffs.
 
 ## Verify
 
-Keep the application running, then:
-
 ```powershell
 dotnet build src/Presentation/Iwas.Presentation.csproj
-cd test/Presentation
-npm ci
-npx playwright install chromium
-npm test
-```
-
-The runner writes screenshots, browser-generated print samples and results to ignored `test/Presentation/artifacts/`. Set `IWAS_URL` to test another local port. Node packages are test-only; the UI itself requires no npm dependencies.
-
-See [Presentation handoff](docs/PRESENTATION_HANDOFF.md) for evidence, design decisions and integration boundaries. The detailed design baseline is [IWAS_UI_UX_PLAN.md](docs/IWAS_UI_UX_PLAN.md).
-
-## Business implementation and Model foundation
-
-The 9 September 2026 plans remain the design baseline. The first executable Business increment implements BM-2 and the calculation portions of BM-4 through BM-7 without changing the working UI preview:
-
-- [Business plan](docs/IWAS_BUSINESS_PLAN.md): analytical use cases, formulas, edge cases, result semantics and future tests.
-- [Model plan](docs/IWAS_MODEL_PLAN.md): source records, typed contracts, read-only queries, mappings and consistency.
-- [Backend delivery plan](docs/IWAS_BACKEND_IMPLEMENTATION_BLUEPRINT.md): phased implementation and replacement of display fixtures.
-
-Run its dependency-free acceptance suite with:
-
-```powershell
-dotnet run --project test/Business/Iwas.Business.Tests.csproj
-```
-
-Run the Model contract, validation, consistency and read-only checks with:
-
-```powershell
 dotnet run --project test/Model/Iwas.Model.Tests.csproj
+dotnet run --project test/Business/Iwas.Business.Tests.csproj
+dotnet run --project test/Database/Iwas.Database.Tests.csproj
 ```
 
-The production Model adapter and authoritative source integration remain unimplemented. The included `IWAS-DEMO-2026-07-08` extract is explicitly read-only demonstration data; no production source is inferred from IDE extensions or earlier display fixtures.
+Database checks require the unchanged local seed. For current UI checks, run the app, then `npm ci` and `npm run test:ui` inside `test/Presentation` (uses installed Microsoft Edge). See [UI refresh](docs/UI_REFRESH.md) for browser settings and verification. Artifacts are ignored. The historical `npm test` runner retains obsolete fixture expectations. See [backend handoff](docs/BACKEND_HANDOFF.md), [Model plan](docs/IWAS_MODEL_PLAN.md), and [Presentation handoff](docs/PRESENTATION_HANDOFF.md) for the earlier implementation baseline.
